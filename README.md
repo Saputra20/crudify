@@ -167,7 +167,9 @@ Each generated model will include:
 - **Validation**: Ensures that incoming request data (e.g., body, params) meets required rules before it reaches the controller.
 ---
 
-## ✅ Example Output (Controller)
+## ✅ Example Output
+
+Counter
 
 ```js
 const list = catchAsync(async (req, res) => {
@@ -180,7 +182,7 @@ const list = catchAsync(async (req, res) => {
 });
 ```
 
-## ✅ Example Output (Service)
+Service
 
 ```js
 const BaseService = require('../../../../@core/service/BaseService');
@@ -192,7 +194,7 @@ module.exports = new UserService(User);
 
 ```
 
-## ✅ Example Output (Route)
+Router
 
 ```js
 /**
@@ -253,7 +255,7 @@ router.post(
 );
 ```
 
-## ✅ Example Output (Validation)
+Validation
 
 ```js
 const Joi = require('joi');
