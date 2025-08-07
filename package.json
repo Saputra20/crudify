@@ -1,6 +1,13 @@
 {
   "name": "@dctrl/crudify",
-  "version": "1.0.0",
+  "version": "1.0.2",
+  "keywords": [
+    "crud",
+    "generator",
+    "cli",
+    "nodejs",
+    "javascript"
+  ],
   "description": "CRUD Generator",
   "main": "bin/cli.js",
   "bin": {
