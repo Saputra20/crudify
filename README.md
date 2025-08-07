@@ -180,6 +180,95 @@ const list = catchAsync(async (req, res) => {
 });
 ```
 
+## ✅ Example Output (Service)
+
+```js
+const BaseService = require('../../../../@core/service/BaseService');
+const { User } = require('../../../../database/models');
+
+class UserService extends BaseService {}
+
+module.exports = new UserService(User);
+
+```
+
+## ✅ Example Output (Route)
+
+```js
+/**
+ * @swagger
+ * /core/v1/users:
+ *   post:
+ *     summary: Create User
+ *     tags: [User]
+ *     security:
+ *       - bearerAuth: [auth]
+ *     description: Returns users data
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/createOrUpdateUserRequest'
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             $ref: '#/components/schemas/createOrUpdateUserRequest'
+ *     responses:
+ *       '201':
+ *         description: Successful Response
+ *         content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/userCreatedResponse'
+ *       '401':
+ *         description: Unauthorize response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/unauthorizedResponse'
+ *       '403':
+ *         description: Forbidden
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/forbiddenResponse'
+ *       '404':
+ *         description: Not Found response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/notFoundResponse'
+ *       '422':
+ *         description: Validation Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/badRequestFormResponse'
+ */
+router.post(
+  '/',
+  authCore({ menu: menuName, permission: 'create' }),
+  validate(userValidation.createOrUpdate),
+  userController.create,
+);
+```
+
+## ✅ Example Output (Validation)
+
+```js
+const Joi = require('joi');
+
+const createOrUpdate = {
+  body: Joi.object().keys({ 
+     name: Joi.string().required()
+  }),
+};
+
+module.exports = {
+  createOrUpdate,
+};
+
+```
 ---
 
 ## 🧩 Integration Notes
