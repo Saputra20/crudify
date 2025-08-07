@@ -7,6 +7,7 @@ const {
   toCamelCase,
   toPascalCase,
 } = require("../core/utils");
+const { execSync } = require("child_process");
 
 const getFilePath = (module, type) => {
   return path.join(__dirname, `../template/${type}/${module}.js`);
@@ -158,8 +159,18 @@ const generator = (baseName, options) => {
       }
 
       generateCRUD(fullPath, name, attributes);
+
+      execSync(
+        `npx sequelize-cli model:create --name ${toPascalCase(
+          name
+        )} --attributes=${attributes}`,
+        {
+          stdio: "inherit",
+        }
+      );
     }
 
+    execSync("npm run lint:fix", { stdio: "inherit" });
     logger.succeed(`Successfully generated files!`);
   } catch (error) {
     logger.fail(`Failed to generate files: ${error.message}`);
