@@ -118,7 +118,7 @@ const generator = (baseName, options) => {
     const { attributes, controller, service, route, validation } = options;
     const nameParts = baseName.split("/");
     const name = nameParts[nameParts.length - 1].toLowerCase();
-    const fullPath = name.toLowerCase();
+    const fullPath = baseName.toLowerCase();
     let isCRUD = true;
 
     if (controller) {
