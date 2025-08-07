@@ -169,7 +169,7 @@ Each generated model will include:
 
 ## ✅ Example Output
 
-Counter
+Controller
 
 ```js
 const list = catchAsync(async (req, res) => {
